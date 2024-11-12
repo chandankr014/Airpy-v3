@@ -1,0 +1,10 @@
+data/
+data
+env
+.env
+venv
+.venv
+test.ipynb
+__pycache__
+__pycache__/
+.__pycache__
