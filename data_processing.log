@@ -1,0 +1,79 @@
+2024-11-14 17:35:07,480 - INFO - Reading data from files\After_Cleaning_Mumbai\site_5112_2019.csv
+2024-11-14 17:36:09,869 - INFO - Reading data from files/After_Cleaning_Mumbai/site_5112_2019.csv
+2024-11-14 17:39:33,790 - INFO - Reading data from files/After_Cleaning_Mumbai/site_5112_2022.csv
+2024-11-14 17:39:57,675 - INFO - Reading data from data/After_Cleaning_Mumbai/site_5112_2022.csv
+2024-11-14 17:39:57,837 - INFO - Converted Timestamp to datetime.
+2024-11-14 17:39:57,837 - INFO - Dropped 35040 rows due to invalid timestamps.
+2024-11-14 17:39:57,847 - INFO - Filtered data for months between March and July: 0 rows.
+2024-11-14 17:39:57,847 - INFO - DataFrame info after processing (site_5112_2019):
+2024-11-14 17:39:57,847 - INFO - Reading data from data\After_Cleaning_Mumbai\site_5112_2020.csv
+2024-11-14 17:39:57,967 - INFO - Converted Timestamp to datetime.
+2024-11-14 17:39:57,978 - INFO - Filtered data for May: 576 rows.
+2024-11-14 17:39:57,978 - INFO - DataFrame info after filtering for May (site_5112_2019):
+2024-11-14 17:39:57,981 - INFO - 
+None
+2024-11-14 17:39:57,985 - INFO - Found 0 rows with NO2 > 100.
+2024-11-14 17:39:58,132 - INFO - Converted Timestamp to datetime.
+2024-11-14 17:39:58,140 - INFO - Filtered data for August: 0 rows.
+2024-11-14 17:39:58,140 - INFO - DataFrame info after filtering for August (site_5112_2020):
+2024-11-14 17:39:58,140 - INFO - 
+None
+2024-11-14 17:46:45,657 - WARNING - posx and posy should be finite values
+2024-11-14 17:46:45,782 - WARNING - posx and posy should be finite values
+2024-11-14 17:46:46,287 - WARNING - posx and posy should be finite values
+2024-11-14 17:46:46,487 - WARNING - posx and posy should be finite values
+2024-11-14 17:46:46,557 - WARNING - posx and posy should be finite values
+2024-11-14 17:47:05,767 - WARNING - posx and posy should be finite values
+2024-11-14 17:47:05,887 - WARNING - posx and posy should be finite values
+2024-11-14 17:47:06,395 - WARNING - posx and posy should be finite values
+2024-11-14 17:47:06,587 - WARNING - posx and posy should be finite values
+2024-11-14 17:47:06,657 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:11,718 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:11,958 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:12,517 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:12,741 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:12,807 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:23,604 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:23,698 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:24,247 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:24,443 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:24,528 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:58,687 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:58,807 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:59,337 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:59,547 - WARNING - posx and posy should be finite values
+2024-11-14 18:18:59,607 - WARNING - posx and posy should be finite values
+2024-11-14 18:21:40,381 - INFO - Reading data from data/After_Cleaning_Mumbai/site_5112_2021.csv
+2024-11-14 18:21:40,527 - INFO - Converted Timestamp to datetime.
+2024-11-14 18:21:40,527 - INFO - Dropped 35040 rows due to invalid timestamps.
+2024-11-14 18:21:40,527 - INFO - Filtered data for months between March and July: 0 rows.
+2024-11-14 18:21:40,527 - INFO - DataFrame info after processing (site_5112_2019):
+2024-11-14 18:21:40,537 - INFO - Reading data from data\After_Cleaning_Mumbai\site_5112_2021.csv
+2024-11-14 18:21:40,657 - INFO - Converted Timestamp to datetime.
+2024-11-14 18:21:40,657 - INFO - Filtered data for May: 576 rows.
+2024-11-14 18:21:40,657 - INFO - DataFrame info after filtering for May (site_5112_2019):
+2024-11-14 18:21:40,667 - INFO - 
+None
+2024-11-14 18:21:40,667 - INFO - Found 0 rows with NO2 > 100.
+2024-11-14 18:21:40,817 - INFO - Converted Timestamp to datetime.
+2024-11-14 18:21:40,825 - INFO - Filtered data for August: 0 rows.
+2024-11-14 18:21:40,825 - INFO - DataFrame info after filtering for August (site_5112_2020):
+2024-11-14 18:21:40,829 - INFO - 
+None
+2024-11-14 18:25:12,738 - INFO - Reading data from data/After_Cleaning_Mumbai/site_5112_2021.csv
+2024-11-14 18:25:12,863 - INFO - Converted Timestamp to datetime.
+2024-11-14 18:25:12,863 - INFO - Dropped 0 rows due to invalid timestamps.
+2024-11-14 18:25:12,863 - INFO - Filtered data for months between March and July: 14688 rows.
+2024-11-14 18:25:12,879 - INFO - DataFrame info after processing (site_5112_2019):
+2024-11-14 18:25:12,888 - INFO - Reading data from data\After_Cleaning_Mumbai\site_5112_2021.csv
+2024-11-14 18:25:13,007 - INFO - Converted Timestamp to datetime.
+2024-11-14 18:25:13,007 - INFO - Filtered data for May: 576 rows.
+2024-11-14 18:25:13,007 - INFO - DataFrame info after filtering for May (site_5112_2019):
+2024-11-14 18:25:13,024 - INFO - 
+None
+2024-11-14 18:25:13,027 - INFO - Found 0 rows with NO2 > 100.
+2024-11-14 18:25:13,153 - INFO - Converted Timestamp to datetime.
+2024-11-14 18:25:13,153 - INFO - Filtered data for August: 1152 rows.
+2024-11-14 18:25:13,153 - INFO - DataFrame info after filtering for August (site_5112_2020):
+2024-11-14 18:25:13,153 - INFO - 
+None

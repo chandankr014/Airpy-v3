@@ -16,50 +16,64 @@ from scripts.data_cleaning import *
 from scripts.functions import *
 
 
-data_dir = Path('data/CPCB/Mumbai')
-save_dir = Path('data/After_Cleaning/')
+""" 
+This is used for data cleaning of CPCB data for specific city.
+Set the paths below and run the code.
+"""
+CITY_NAME = 'pune'
+
+data_dir = Path(f'data/LIVE/')
+save_dir = Path(f'data/airpy_clean/')
+
+if not os.path.exists(save_dir):
+    os.makedirs(save_dir)
+
 sites = pd.read_csv('files/sites.csv')
 files = os.listdir(data_dir)
 
-years = [2019,2020,2021,2022,2023]
+# years = [2019,2020,2021,2022,2023]
 
 
 for idx, file in enumerate(files):
+    print(file)
     try:
         filepath = os.path.join(data_dir, file)
         mixed_unit_identification = False
         
-        site_id, site_name, year, city = get_siteId_Name_Year_City(file, sites)
+        site_id, site_name, year, city = get_siteId_Name_Year_City_LIVE(file, sites)
         print("FILE:", file)
         
         # gc.collect()
         true_df, station_name, city, state = get_formatted_df(filepath, site_name, city, city)
-        if pd.api.types.is_datetime64_any_dtype(true_df['Timestamp'])==False:
-            true_df['Timestamp'] = pd.to_datetime(true_df['Timestamp'])
-            true_df = true_df[true_df['Timestamp'].dt.year == year] #sort for the year
+        # if pd.api.types.is_datetime64_any_dtype(true_df['Timestamp'])==False:
+        #     true_df['Timestamp'] = pd.to_datetime(true_df['Timestamp'])
+        #     true_df = true_df[true_df['Timestamp'].dt.year == year] #sort for the year
+        print(true_df.columns)
         true_df = true_df.loc[~true_df.index.duplicated(keep='first')]
-        print(true_df.shape, "LOG: TRUE DF")
+        print("LOG: TRUE DF", true_df.shape)
         
-        df = true_df.copy(deep=True)
+        df = true_df.copy()
 
         filename = station_name+"_"+str(year) 
 
         # make every html related code runnable (uncomment if any)
         start_html(filename)
 
-        local_df = df.copy(deep=True)
+        local_df = df.copy()
         local_df['date'] =  pd.to_datetime(local_df['Timestamp']).dt.date
-        local_df = local_df.sort_values(by=['Timestamp'])
-        local_df = local_df[local_df['date'].notna()]
+        # local_df = local_df.sort_values(by=['Timestamp'])
+        # local_df = local_df[local_df['date'].notna()]
+        print("LOG:", local_df.shape)
         local_df['site_id'] = site_id
         local_df['site_name'] = site_name
         local_df['city'] = city
         local_df['state'] = state
 
         pollutants = ['PM25', 'PM10', 'NOx', 'NO2', 'NO', 'Ozone']
+        # pollutants = ['PM25', 'PM10', 'NO', 'NO2', 'NOx', 'NH3', 'SO2', 'CO', 'Ozone']
         for pollutant in pollutants:
             if len(df[pollutant].value_counts()) == 0:
-                print("No available ", pollutant, " data")
+                print("Not available ", pollutant, " data")
                 continue
             else:
                 # DATA CLEANING 
@@ -86,9 +100,17 @@ for idx, file in enumerate(files):
         local_df['year'] = year
         print("LOG: DONE LOCAL DF")
 
-        # SAVING ------------
-        fn = str(save_dir) + '/' + str(site_id) + '_' + str(year)+ ".csv"
-        local_df.to_csv(fn, index=False)
+        # SAVING -----------------------
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+        if file.endswith('.csv'):
+            fn = str(save_dir) + '/' + str(site_id) + '_' + str(year)+ ".csv"
+            local_df.to_csv(fn, index=False)
+        if file.endswith('.xlsx'):
+            fn = str(save_dir) + '/' + str(site_id) + '_' + str(year)+ ".xlsx"
+            local_df.drop(columns=['To Date', 'Timestamp'], inplace=True)
+            local_df.rename(columns={'From Date':'Timestamp'}, inplace=True)
+            local_df.to_excel(fn, index=False)
         
         print('Saved successfully for: '  + str(site_id) + '_' + str(year))
         plt.close('all')
@@ -97,4 +119,3 @@ for idx, file in enumerate(files):
     except Exception as e:
         print("Error Occured in [main.py]- ", e)
         print("----------------------------------------------------------")
-    

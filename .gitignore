@@ -5,6 +5,15 @@ env
 venv
 .venv
 test.ipynb
+.ipynb
+.ipynb_checkpoints/
 __pycache__
 __pycache__/
 .__pycache__
+.docx
+airpy_clean/*.csv
+cleaned/*.csv
+CPCB/*.csv
+LIVE/*.csv
+plots/
+HTMLS/

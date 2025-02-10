@@ -4,6 +4,11 @@
 CPCB FORMAT: 15Min_2017_site_168_Bandra_Mumbai_MPCB_15Min.csv
 req        : Raw_data_15Min_2019_site_5112_Powai_Mumbai_MPCB_15Min.csv
 """
+
+import re
+import pandas as pd
+
+
 def get_siteId_Name_Year_City(file: str, sites: list):
     """
     Extracts site_id, site_name, year, and city from the filename based on its format.
@@ -41,3 +46,32 @@ def get_siteId_Name_Year_City(file: str, sites: list):
     return site_id, site_name, year, city
 
 
+def get_siteId_Name_Year_City_LIVE(file, sites):
+    try:
+        # Extract the numerical part after "site_"
+        match = re.search(r'site_(\d+)(\d{4})(\d{2})(\d{2})(\d{6})', file)
+        if not match:
+            raise ValueError("Invalid filename format")
+
+        site_id = match.group(1)    # Extract variable-length site ID
+        year = int(match.group(2))  # Extract 4-digit year
+        month = int(match.group(3)) # Extract 2-digit month
+        day = int(match.group(4))   # Extract 2-digit day
+        time = match.group(5)       # Extract HHMMSS time
+
+        # Fetch city based on site_id
+        city = sites[sites['site_code'] == 'site_'+site_id]['city'].values
+        city = city[0].strip() if len(city) > 0 else "Unknown"
+
+        print(f"SITE ID: {site_id} - YEAR: {year} - MONTH: {month} - DAY: {day} - TIME: {time} - CITY: {city}")
+        return site_id, site_id, year,  city
+
+    except Exception as e:
+        print(f"Error parsing filename '{file}': {e}")
+        return None
+
+
+# sites = pd.read_csv('files/sites.csv')
+# print(sites.shape)
+# fn = "site_511220250206163619.xlsx"
+# get_siteId_Name_Year_City_LIVE(fn, sites)

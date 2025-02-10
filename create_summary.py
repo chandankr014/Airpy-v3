@@ -64,8 +64,6 @@ def summarize_mean_file(files: list):
                 summary['prevalent_error'] = ''
             print(f"DONE: {summary['site_id']}")
 
-        except KeyError as e:
-            summary[e.args[0]] = ''
         except Exception as e: 
             print('failed for file: ',e)
             raise e
@@ -84,6 +82,7 @@ def create_site_list(files):
             records.append({'site_id': site_id, 'pollutant': p})
     df = pd.DataFrame(records)
     return df
+
 
 if __name__ == '__main__':
     files = glob.glob('data/After_Cleaning_Mumbai/*')

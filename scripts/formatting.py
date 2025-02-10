@@ -5,10 +5,10 @@ from analysis.df import clean_dataframe_filepath, clean_dataframe
 
 def read_df(df):
     # Check if 'Timestamp' or similar column exists and rename it to 'Timestamp'
-    dd = ['date','Date','dates','Dates','Timestamp','Timestamps']
+    dd = ['Timestamp']
     for d in dd:
         if d in df.columns:
-            df[d] = pd.to_datetime(df[d], errors='coerce')
+            df[d] = pd.to_datetime(df[d], errors='coerce', format='%Y-%m-%d %H:%M')
 
     #cleans all data for null entries and replaces with np.nan
     try:
@@ -47,10 +47,8 @@ def read_df(df):
     except:
         df['PM25'] = np.nan
         print("NO PM data")
-        
     return df
-
-
+        
 
 def get_formatted_df(path, station_name=None, city=None, state=None):
     
@@ -76,11 +74,31 @@ def get_formatted_df(path, station_name=None, city=None, state=None):
 
     Raw_data_15Min_2022_site_103_CRRI_Mathura_Road_Delhi_IMD_15Min.csv
     """ 
+    if path.endswith('.csv'):
+        df = pd.read_csv(path)
+        df = clean_dataframe(df)
+        df = read_df(df=df)
+        df.drop(df.filter(regex="Unname"),axis=1, inplace=True)
 
-    df = pd.read_csv(path)
-    df = clean_dataframe(df)
-    df = read_df(df=df)
-    df.drop(df.filter(regex="Unname"),axis=1, inplace=True) 
+    elif path.endswith('.xlsx'):
+        df = pd.read_excel(path)
+        df = df.iloc[16:].reset_index(drop=True)
+        end_index = df[df.iloc[:, 0] == "Prescribed Standards"].index[0]
+        df = df.iloc[:end_index-1].reset_index(drop=True)
+        df.columns = ['From Date', 'To Date', 'PM2.5', 'PM10', 'NO', 'NO2', 'NOx', 'NH3', 'SO2', 'CO',
+                        'Ozone', 'Benzene', 'Toluene', 'Eth-Benzene', 'MP-Xylene', 'RH', 'WS', 'WD', 'SR',
+                        'BP', 'Xylene', 'AT']
+        # df.rename(columns={'From Date': 'Timestamp'}, inplace=True)
+        df['Timestamp'] = df['From Date']
+        print("Before cleaning: ", df.shape)
+        # df['Timestamp'] = pd.to_datetime(df['Timestamp'], errors='coerce')
+        # df.sort_values(by='Timestamp', inplace=True)
+        # df.drop_duplicates(subset=['Timestamp'], keep='first', inplace=True)
+        print(df)
+        df = clean_dataframe(df)
+        df = read_df(df=df)
+        df.drop(df.filter(regex="Unname"),axis=1, inplace=True)
+
     return df, station_name, city, state
 
 
